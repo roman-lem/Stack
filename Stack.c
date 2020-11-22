@@ -1,5 +1,14 @@
+/**
+	*	@mainpage Stack task
+	*
+	* @author Roman Lem
+	*
+	* @brief This program is emulating stack
+	*/
+
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include "./library/source/StackStruct.h"
 #include "./library/source/StackFunc.h"
 
@@ -8,25 +17,40 @@
 int main(){
 
 	stack_t stack = {};
+	int cap;
 
-	StackConstruct(&stack, 5);
+	printf("Let's get started. Enter the capacity of stack:\nn = ");
+	scanf("%d", &cap);
 
-	StackPush(&stack, 10);
+	if(StackConstruct(&stack, cap) == 0){
 
-	StackPush(&stack, 20);
+		printf("Stack is ready. Pleas, enter the command :\n \
+			      StackPush(n);\n \
+			      StackPop();  \n \
+			      StackDump(); \n \
+			      Exit();      \n:");
+	}
 
-	StackPush(&stack, 30);
+	char command[100];
+  scanf("%s", command);
 
-	StackPush(&stack, 40);
+  while(strcmp(command, "Exit();") != 0){
 
-	int elem;
-	StackPop(&stack, &elem);
+  	if(strcmp(command, "StackDump();") == 0){
 
-	printf("Last element = %d\n", elem);
+  		StackDump(&stack);
+  	}
 
-	StackDump(&stack);
+  	if(strcmp(command, "StackDump();") == 0){
 
-	StackDestruct(&stack);
+  		StackDump(&stack);
+  	}
+
+  	printf(":");
+  	scanf("%s", command);
+  }
+
+  printf("End of prog\n");
 
 	return 0;
 }
