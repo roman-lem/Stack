@@ -41,6 +41,7 @@ void StackDump(const stack_t* stack){
 
 		case 5:
 			printf("stack (%s) [%p]{\n", "5 <&buf == NULL>", &stack);
+			return;
 			break;
 
 		case 6:

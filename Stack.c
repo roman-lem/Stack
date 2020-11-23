@@ -3,7 +3,7 @@
 	*
 	* @author Roman Lem
 	*
-	* @brief This program is emulating stack
+	* @brief This program emulate stack
 	*/
 
 #include <stdio.h>
@@ -26,7 +26,7 @@ int main(){
 	if(StackConstruct(&stack, cap) == 0){
 
 		printf("Stack is ready. Pleas, enter the command :\n \
-Push(n) \n \
+Push(n)  \n \
 Pop      \n \
 Dump     \n \
 Exit     \n:");
@@ -81,7 +81,7 @@ Exit     \n:");
   	scanf("%s", command);
   }
 
-  printf("End of program\n");
+  StackDestruct(&stack);
 
 	return 0;
 }
