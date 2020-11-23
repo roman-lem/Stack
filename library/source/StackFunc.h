@@ -1,3 +1,5 @@
+#define DEBUG 1
+
 #include "StackStruct.h"
 #include <stdio.h>
 #include <stdlib.h>

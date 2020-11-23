@@ -128,7 +128,13 @@ int StackPush(stack_t* stack, int element){
 	if(StackOK(stack) != 0)
 	  return StackOK(stack);
 
-	if(stack->top == stack->capacity)
+#ifdef DEBUG
+
+	assert(stack->top < stack->capacity);
+
+#endif
+
+	if(stack->top >= stack->capacity)
 		return -1;
 
 	stack->top++;
@@ -155,7 +161,13 @@ int StackPop(stack_t* stack, int* element){
 	if(StackOK(stack) != 0)
 	  return StackOK(stack);
 
-	if(stack->top == 0)
+#ifdef DEBUG
+
+	assert(stack->top > 0);
+
+#endif
+
+	if(stack->top <= 0)
 		return -1;
 
 	*element = *(stack->buf + stack->top - 1);

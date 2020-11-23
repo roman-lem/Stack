@@ -9,6 +9,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <ctype.h>
 #include "./library/source/StackStruct.h"
 #include "./library/source/StackFunc.h"
 
@@ -25,32 +26,62 @@ int main(){
 	if(StackConstruct(&stack, cap) == 0){
 
 		printf("Stack is ready. Pleas, enter the command :\n \
-			      StackPush(n);\n \
-			      StackPop();  \n \
-			      StackDump(); \n \
-			      Exit();      \n:");
+Push(n) \n \
+Pop      \n \
+Dump     \n \
+Exit     \n:");
 	}
 
 	char command[100];
   scanf("%s", command);
 
-  while(strcmp(command, "Exit();") != 0){
+  while(strcmp(command, "Exit") != 0){
 
-  	if(strcmp(command, "StackDump();") == 0){
+  	if(strcmp(command, "Dump") == 0){
 
   		StackDump(&stack);
   	}
 
-  	if(strcmp(command, "StackDump();") == 0){
+  	else if(strcmp(command, "Pop") == 0){
 
-  		StackDump(&stack);
+  		int number = 0;
+
+  		if(StackPop(&stack, &number) == 0){
+
+  			printf(">>> %d\n", number);  			
+  		}
+
+  	}                       
+  													//12345
+  	else if(strncmp(command, "Push(", 5) == 0){
+
+  		int number = 0;
+  		int i;
+  		
+  		if(isdigit(command[5])){
+
+  			for(i = 5; isdigit(command[i]); i++){
+
+  				number = number * 10 + (command[i] - '0');
+  			}
+  		}
+
+  		if(strcmp((command + i), ")") == 0){
+
+  			StackPush(&stack, number);
+  		}
+  	}
+
+  	else{
+
+  		printf(">>> Try again\n");
   	}
 
   	printf(":");
   	scanf("%s", command);
   }
 
-  printf("End of prog\n");
+  printf("End of program\n");
 
 	return 0;
 }
