@@ -41,6 +41,7 @@ void StackDump(const stack_t* stack){
 
 		case 5:
 			printf("stack (%s) [%p]{\n", "5 <&buf == NULL>", &stack);
+			return;
 			break;
 
 		case 6:
@@ -62,9 +63,14 @@ void StackDump(const stack_t* stack){
 			printf("\t\t*[%d]: %d\n", i, stack->buf[i]);
 		}
 
-		else{
+		else if(stack->buf[i] == POISON_NUMBER){
 
 			printf("\t\t![%d]: %d (POISON)\n", i, stack->buf[i]);
+		}
+
+		else{
+
+			printf("\t\t![%d]: %d\n", i, stack->buf[i]);
 		}
 	}
 	printf("\t}\n");
@@ -76,7 +82,7 @@ void StackDump(const stack_t* stack){
 
 int StackOK(const stack_t* stack){
 
-	if(&stack == NULL)
+	if(stack == NULL)
 		return 1;
 
 	if(stack->capacity == 0)
@@ -105,9 +111,19 @@ int StackOK(const stack_t* stack){
 
 int StackConstruct(stack_t* stack, int capacity){
 
+#ifdef DEBUG
+
 	assert(stack != NULL);
 
 	assert(capacity > 0);
+
+#endif
+
+	if(stack == NULL)
+		return -1;
+
+	if(capacity == 0)
+		return -2;
 
 	stack->capacity = capacity;
 
@@ -121,15 +137,7 @@ int StackConstruct(stack_t* stack, int capacity){
 		*(stack->buf + i) = POISON_NUMBER;
 	}
 
-	if(StackOK(stack) == 0){
-
-		return 0;
-	}
-
-	else{
-
-		return StackOK(stack);
-	}
+	return StackOK(stack);
 }
 
 //--------------------------------------------------------------------------
@@ -145,7 +153,7 @@ int StackPush(stack_t* stack, int element){
 
 #endif
 
-	if(stack->top >= stack->capacity)
+	if(stack->top == stack->capacity)
 		return -1;
 
 	stack->top++;

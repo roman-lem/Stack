@@ -32,7 +32,7 @@ int StackOK(const stack_t* stack);
 	*
 	*	@param capacity Number of elements, that we need
 	*
-	*	@return 0, or code of error like StackOK()
+	*	@return 0, or code of error
 	*/
 
 int StackConstruct(stack_t* stack, int capacity);
@@ -44,7 +44,7 @@ int StackConstruct(stack_t* stack, int capacity);
 	*
 	* @param element Element that should be pushed
 	*
-	*	@return If stack is full return -1, else return 0, or code of error like StackOK()
+	*	@return If stack is full return -1, else return 0, or code of error
 	*/
 
 int StackPush(stack_t* stack, int element);
@@ -56,7 +56,7 @@ int StackPush(stack_t* stack, int element);
 	*
 	* @param element Element that should be poped
 	*
-	*	@return If stack is empty return -1, else return 0, or code of error like StackOK()
+	*	@return If stack is empty return -1, else return 0, or code of error
 	*/
 
 int StackPop(stack_t* stack, int* element);
@@ -66,7 +66,7 @@ int StackPop(stack_t* stack, int* element);
 	*
 	*	@param stack Pointer on stack
 	*
-	*	@return 0, or code of error like StackOK()
+	*	@return 0, or code of error
 	*/
 
 int StackDestruct(stack_t* stack);
